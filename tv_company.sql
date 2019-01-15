@@ -1,0 +1,35 @@
+CREATE DATABASE anilu556;
+
+# Schema
+
+CREATE TABLE Serie (
+    Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Serie VARCHAR(50) NOT NULL,
+);
+
+CREATE TABLE Actors (
+    Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ActorName VARCHAR(50) NOT NULL,
+    SerieId INT, FOREIGN KEY (SerieId) REFERENCES Serie(Id)
+);
+
+CREATE TABLE Directors(
+  Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  DirectorName VARCHAR(50) NOT NULL,
+  SerieId INT, FOREIGN KEY (SerieId) REFERENCES Serie(Id)
+);
+
+CREATE TABLE Episodes (
+    Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    SerieId INT, FOREIGN KEY (SerieId) REFERENCES Serie(Id),
+    EpisodeName VARCHAR(300) NOT NULL,
+    ActorId INT, FOREIGN KEY (ActorId) REFERENCES Actor(Id),
+    DirectorId INT, FOREIGN KEY (DirectorId) REFERENCES Director(Id)
+);
+
+CREATE TABLE  Transmitted (
+    Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    EpisodeId int, foreign key (EpisodeId) REFERENCES Episode(Id),
+    Times INT(3),
+    Dates Date NOT NULL
+);
